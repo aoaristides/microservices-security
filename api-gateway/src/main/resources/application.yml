@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  
+info:
+  name: api-gateway
+  description: API Gateway Sample
+  
+zuul:
+#  add-host-header: true
+#  ignore-security-headers: false
+  sensitiveHeaders: 
+#  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  routes:
+    security-server:
+      path: /security/**
+      serviceId: security-server
+      stripPrefix: false
+    aluno-service:
+      path: /session/**
+      serviceId: aluno-service
+    disciplina-service:
+      path: /speaker/**
+      serviceId: disciplina-service  
