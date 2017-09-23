@@ -1,0 +1,17 @@
+<div class="ng-scope">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Speakers
+    </div>
+    <div class="panel-body table-responsive relative">
+      <p-dataTable [value]="records" class="table table-hover table-striped" #dt sortMode="single"
+                   [rows]="20" [paginator]="true" [pageLinks]="5"
+                   [rowsPerPageOptions]="[50,100,300,500]"
+                   [sortableRowGroup]="true">
+        <p-column field="firstName" header="First Name"></p-column>
+        <p-column field="lastName" header="Last Name"></p-column>
+      </p-dataTable>
+    </div>
+  </div>
+  <loading-indicator [isLoading]="loading"></loading-indicator>
+</div>

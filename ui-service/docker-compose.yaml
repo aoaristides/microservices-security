@@ -1,0 +1,12 @@
+version: '2'
+services:
+  ach-frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: razorvision/braviant-frontend
+    ports:
+      - 4200:4200
+    volumes:
+      - .:/opt/frontend
+    command: sh -c 'npm install && ng serve --host 0.0.0.0'

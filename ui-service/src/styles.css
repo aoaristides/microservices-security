@@ -1,0 +1,153 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('../node_modules/primeng/resources/themes/omega/theme.css');
+@import url('../node_modules/primeng/resources/primeng.min.css');
+@import url('../node_modules/font-awesome/css/font-awesome.min.css');
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+
+#applicant-modal table.table {
+    margin-bottom: 0;
+}
+
+#applicant-modal table.table tr:first-child td,
+#applicant-modal table.table tr:first-child th {
+    border-top: none;
+}
+
+.glyphicon.red {
+    color: red;
+}
+.glyphicon.green {
+    color: green;
+}
+.glyphicon.yellow {
+    color: #c7b132;
+}
+
+.table {
+    font-size: 12px;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+    text-align: left;
+}
+
+.table th.wrap, .table td.wrap {
+    white-space: normal;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+  z-index: 2;
+  color: #000;
+  cursor: default;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #337ab7;
+}
+
+
+
+
+
+.relative {
+    position:relative;
+}
+.is-loading div.loading-container {
+    display: block;
+}
+div.loading-container {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index:10;
+}
+div.loading-container div.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin: -25px 0 0 -25px;
+}
+div.loading-container div.loading span{
+    font-size: 50px;
+    color: #fff;
+}
+
+
+.reloading-spinner {
+    display: none;
+}
+.reloading .reloading-spinner {
+    display: inline-block;
+}
+
+
+.panel-title .step {
+    opacity: 0.4;
+}
+.panel-title .step.active {
+    opacity: 1.0;
+    font-weight: bold;
+}
+
+.ci-detail-loan-table {
+  overflow-x: scroll;
+}
+
+
+.glyphicon.spin {
+    -webkit-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+}
+.fa-pulse {
+    -webkit-animation: spin 1s infinite steps(8);
+    animation: spin 1s infinite steps(8);
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+.btn-primary{
+  color: white !important;
+}
+
+.top0 { margin-top:0px !important;  }
+.top5 { margin-top:5px !important;; }
+.top7 { margin-top:7px !important;; }
+.top10 { margin-top:10px !important;; }
+.top15 { margin-top:15px !important;; }
+.top17 { margin-top:17px !important;; }
+.top30 { margin-top:30px !important;; }
+
+.bottom0 { margin-bottom:0px !important; }
+.bottom5 { margin-bottom:5px !important;; }
+.bottom7 { margin-bottom:7px !important;; }
+.bottom10 { margin-bottom:10px !important;; }
+.bottom15 { margin-bottom:15px !important;; }
+.bottom17 { margin-bottom:17px !important;; }
+.bottom30 { margin-bottom:30px !important;; }
