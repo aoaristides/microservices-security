@@ -1,4 +1,4 @@
-# Braviant Frontend
+# UI Frontend
 
 This project was created with Angular 2 and Angular-CLI
 
