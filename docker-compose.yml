@@ -1,0 +1,70 @@
+version: '2'
+services:
+  discovery-server:
+    image: microservices/discovery-server
+    ports:
+      - 8761:8761
+    networks:
+      - microservices
+
+  security-server:
+    image: microservices/security-server
+    links:
+      - discovery-server
+    ports:
+      - 9999:9999
+    networks:
+      - microservices
+
+  speaker-service:
+    image: microservices/speaker-service
+    links:
+      - discovery-server
+      - security-server
+    ports:
+      - 8081:8081
+    networks:
+      - microservices
+
+  session-service:
+    image: microservices/session-service
+    links:
+      - discovery-server
+      - security-server
+    ports:
+      - 8082:8082
+    networks:
+      - microservices
+
+  api-gateway:
+    image: microservices/api-gateway
+    links:
+      - discovery-server
+      - security-server
+      - session-service
+      - speaker-service
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    networks:
+      - microservices
+
+  ui-frontend:
+    build:
+      context: ./ui-service
+      dockerfile: Dockerfile
+    image: microservices/ui-service
+    expose:
+      - 80
+    ports:
+      - 4200:80
+    volumes:
+      - .:/opt/frontend
+    command: sh -c 'npm install && ng serve --host 0.0.0.0'
+    networks:
+      - microservices
+
+networks:
+  microservices:
+    driver: bridge

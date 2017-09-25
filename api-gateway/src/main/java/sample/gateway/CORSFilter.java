@@ -1,4 +1,4 @@
-package com.braviant.security.filter;
+package sample.gateway;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

@@ -3,8 +3,7 @@ FROM frolvlad/alpine-oraclejdk8:slim
 ENV SPRING_PROFILES_ACTIVE ${SPRING_PROFILES_ACTIVE:-docker}
 ENV JAVA_OPTS ${JAVA_OPTS:-'-Xmx512m'}
 ENV DEBUG_OPTS ${DEBUG_OPTS}
-ENV PORT ${PORT:-9999}
-ENV EUREKA_URI 'http://discover-service:8761/eureka'
+ENV PORT ${PORT:-8761}
 
 RUN adduser -D -g '' java
 

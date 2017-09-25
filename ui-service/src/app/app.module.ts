@@ -21,6 +21,8 @@ import {LoginService} from "./login/login.service";
 import {HomeComponent} from "./home/home.component";
 import {SpeakersComponent} from "./speakers/speakers.component";
 import {SpeakersService} from "./speakers/speakers.service";
+import {SessionsService} from "./sessions/sessions.service";
+import {SessionsComponent} from "./sessions/sessions.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import {SpeakersService} from "./speakers/speakers.service";
     LoginComponent,
     HomeComponent,
     SpeakersComponent,
+    SessionsComponent,
     LoadingIndicator
   ],
   imports: [
@@ -49,6 +52,7 @@ import {SpeakersService} from "./speakers/speakers.service";
     HttpService,
     LoginService,
     SpeakersService,
+    SessionsService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

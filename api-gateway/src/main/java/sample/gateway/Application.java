@@ -22,7 +22,11 @@ public class Application {
 //	public CorsFilter corsFilter() {
 //	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 //	    final CorsConfiguration config = new CorsConfiguration();
-//	    config.addAllowedOrigin("http://resttesttest.com");
+//	    config.addAllowedOrigin("*");
+//	    config.addAllowedMethod("*");
+//	    config.addExposedHeader("x-requested-with");
+//		config.addExposedHeader("authorization");
+//		config.addExposedHeader("content-type");
 //	    source.registerCorsConfiguration("/**", config);
 //	    return new CorsFilter(source);
 //	}

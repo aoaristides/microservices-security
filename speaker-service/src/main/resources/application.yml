@@ -33,4 +33,11 @@ security:
 #  oauth2:
 #    resource:
 #      preferTokenInfo: false
-#      userInfoUri: http://localhost:9999/users/current                    
+#      userInfoUri: http://localhost:9999/users/current
+
+eureka:
+ client:
+   serviceUrl:
+     defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+ instance:
+   preferIpAddress: true

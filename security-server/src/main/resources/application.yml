@@ -4,9 +4,10 @@ server:
 spring:
   application:
     name: security-server 
-  jpa:
-    show-sql: true
-    
-security:
-  basic:
-    enabled: false
+
+eureka:
+ client:
+   serviceUrl:
+     defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+ instance:
+   preferIpAddress: true

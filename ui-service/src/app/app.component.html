@@ -14,6 +14,9 @@
         <li *ngIf="isLogged()" ng-class="{active: isActive(['^/speakers/'])}">
           <a role-link href="/speakers">Speakers</a>
         </li>
+        <li *ngIf="isLogged()" ng-class="{active: isActive(['^/sessions/'])}">
+          <a role-link href="/sessions">Sessions</a>
+        </li>
         <li *ngIf="isLogged()">
           <a href="#" (click)="logout()">Logout</a>
         </li>

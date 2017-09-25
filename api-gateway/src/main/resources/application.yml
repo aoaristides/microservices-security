@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
  
 spring:
   application:
@@ -12,8 +12,7 @@ info:
 zuul:
   add-host-header: true
   ignore-security-headers: false
-  sensitiveHeaders: 
-#  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  sensitiveHeaders:
   routes:
     security-server:
       path: /security/**
@@ -23,4 +22,11 @@ zuul:
       serviceId: session-service
     disciplina-service:
       path: /speaker/**
-      serviceId: speaker-service  
+      serviceId: speaker-service
+
+eureka:
+ client:
+   serviceUrl:
+     defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+ instance:
+   preferIpAddress: true
