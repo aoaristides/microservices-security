@@ -17,4 +17,10 @@ export class SpeakersService {
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  delete(id: number): Observable<Speaker> {
+    return this.http.delete(environment.apiRoot + "/speaker/speakers/" + id)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }

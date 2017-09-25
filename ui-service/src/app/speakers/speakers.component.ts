@@ -3,6 +3,7 @@ import {Message, SelectItem} from "primeng/components/common/api";
 import {SpeakersService} from "./speakers.service";
 import {Speaker} from "../models/speaker";
 import {LoadingPage} from "../loading/loading-indicator";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-speakers',
@@ -11,12 +12,11 @@ import {LoadingPage} from "../loading/loading-indicator";
 export class SpeakersComponent extends LoadingPage implements OnInit {
 
   records: Speaker[] = [];
-  paymentFunding: SelectItem[];
 
   msgs: Message[] = [];
 
 
-  constructor(private speakersService: SpeakersService) {
+  constructor(private service: SpeakersService, private router: Router) {
     super(false)
   }
 
@@ -25,7 +25,7 @@ export class SpeakersComponent extends LoadingPage implements OnInit {
   }
 
   getAll() {
-    this.speakersService.getAll()
+    this.service.getAll()
       .subscribe(
         data => {
           this.records = data;
@@ -34,6 +34,19 @@ export class SpeakersComponent extends LoadingPage implements OnInit {
         err => {
           console.log(err);
           this.ready();
+        });
+  }
+
+  delete(speaker: Speaker) {
+    this.service.delete(speaker.id)
+      .subscribe(
+        data => {
+          this.getAll();
+        },
+        err => {
+          alert(err);
+          console.log(err);
+          this.router.navigate(['speakers']);
         });
   }
 }

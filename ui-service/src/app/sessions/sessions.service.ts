@@ -17,4 +17,10 @@ export class SessionsService {
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  delete(code: string): Observable<Session> {
+    return this.http.delete(environment.apiRoot + "/session/sessions/" + code)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }
