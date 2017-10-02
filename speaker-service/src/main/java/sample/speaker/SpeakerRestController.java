@@ -2,6 +2,7 @@ package sample.speaker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,11 +14,13 @@ public class SpeakerRestController {
 	@Autowired
 	SpeakerRepository repo;
 
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping
     public List<Speaker> getAll() {
         return repo.findAll();
     }
 
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/{id}")
 	public ResponseEntity<Speaker> get(@PathVariable Long id) {
 		Speaker speaker = repo.findOne(id);
@@ -28,6 +31,7 @@ public class SpeakerRestController {
 		}
 	}
 
+	@PreAuthorize("hasRole('MANAGER') && #oauth2.isUser()")
 	@PostMapping
 	public ResponseEntity<Speaker> create(@RequestBody Speaker speaker) {
         speaker = repo.save(speaker);
@@ -38,6 +42,7 @@ public class SpeakerRestController {
 		}
 	}
 
+	@PreAuthorize("hasRole('MANAGER') && #oauth2.isUser()")
 	@PutMapping("/{id}")
 	public ResponseEntity<Speaker> update(@PathVariable Long id, @RequestBody Speaker speaker) {
 		if (speaker != null) {
@@ -49,6 +54,7 @@ public class SpeakerRestController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ADMIN') && #oauth2.isUser()")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Speaker> delete(@PathVariable Long id) {
 		Speaker speaker = repo.findOne(id);
@@ -60,6 +66,7 @@ public class SpeakerRestController {
 		}
 	}
 
+	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/by/ids")
 	public List<Speaker> getSpeakers(@RequestBody List<Long> speakerIds) {
 		return repo.findAll(speakerIds);

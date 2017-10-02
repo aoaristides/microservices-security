@@ -2,6 +2,7 @@ package sample.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
@@ -17,17 +18,18 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
-//	@Bean
-//	public CorsFilter corsFilter() {
-//	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//	    final CorsConfiguration config = new CorsConfiguration();
-//	    config.addAllowedOrigin("*");
-//	    config.addAllowedMethod("*");
-//	    config.addExposedHeader("x-requested-with");
-//		config.addExposedHeader("authorization");
-//		config.addExposedHeader("content-type");
-//	    source.registerCorsConfiguration("/**", config);
-//	    return new CorsFilter(source);
-//	}
+
+	@Bean
+	public FilterRegistrationBean corsFilter() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("*");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("*");
+		source.registerCorsConfiguration("/**", config);
+		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+		bean.setOrder(0);
+		return bean;
+	}
 }
