@@ -10,7 +10,7 @@
 		<relativePath>../</relativePath>
 	</parent>
 
-	<artifactId>security-server</artifactId>
+	<artifactId>oauth2-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -20,8 +20,8 @@
 		<skipDockerBuild>false</skipDockerBuild>
 	</properties>
 
-	<name>security-server</name>
-	<description>Security Server</description>
+	<name>oauth2-server</name>
+	<description>OAuth2 Server</description>
 
 	<dependencies>
 		<dependency>

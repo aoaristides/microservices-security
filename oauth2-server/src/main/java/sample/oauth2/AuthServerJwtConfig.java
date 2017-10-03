@@ -1,4 +1,4 @@
-package sample.security;
+package sample.oauth2;
 
 import java.util.Arrays;
 

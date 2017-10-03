@@ -7,8 +7,8 @@ services:
     networks:
       - microservices
 
-  security-server:
-    image: microservices/security-server
+  oauth2-server:
+    image: microservices/oauth2-server
     links:
       - discovery-server
     ports:
@@ -20,7 +20,7 @@ services:
     image: microservices/speaker-service
     links:
       - discovery-server
-      - security-server
+      - oauth2-server
     ports:
       - 8081:8081
     networks:
@@ -30,7 +30,7 @@ services:
     image: microservices/session-service
     links:
       - discovery-server
-      - security-server
+      - oauth2-server
     ports:
       - 8082:8082
     networks:
@@ -40,7 +40,7 @@ services:
     image: microservices/api-gateway
     links:
       - discovery-server
-      - security-server
+      - oauth2-server
       - session-service
       - speaker-service
     expose:
