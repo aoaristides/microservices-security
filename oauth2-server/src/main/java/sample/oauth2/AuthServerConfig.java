@@ -36,8 +36,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 		clients.inMemory()
 			.withClient("client")
 				.secret("secret")
-				.authorizedGrantTypes("password", "client_credentials", "authorization_code", "implicit")
-				.scopes("oauth2")
+				.authorizedGrantTypes("password", "client_credentials", "authorization_code", "implicit", "refresh_token")
+				.scopes("openid")
 				.autoApprove(true);
 	}
 

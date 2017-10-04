@@ -10,7 +10,7 @@
 		<relativePath>../</relativePath>
 	</parent>
 
-	<artifactId>session-service</artifactId>
+	<artifactId>conference-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -20,8 +20,8 @@
 		<skipDockerBuild>false</skipDockerBuild>
 	</properties>
 
-	<name>session-service</name>
-	<description>Session Service</description>
+	<name>conference-service</name>
+	<description>Conference Service</description>
 
 	<dependencies>
 		<dependency>

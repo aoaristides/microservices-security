@@ -54,7 +54,7 @@ public class SpeakerRestController {
 		}
 	}
 
-	@PreAuthorize("hasRole('ADMIN') && #oauth2.isUser()")
+	@PreAuthorize("hasRole('ADMIN') && #oauth2.hasScope('delete')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Speaker> delete(@PathVariable Long id) {
 		Speaker speaker = repo.findOne(id);

@@ -1,4 +1,4 @@
-package sample.session;
+package sample.conference;
 
 import java.util.List;
 
@@ -63,7 +63,7 @@ public class SessionRestController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN') && #oauth2.isUser()")
+    @PreAuthorize("hasRole('ADMIN') && #oauth2.hasScope('delete')")
     @DeleteMapping("/{code}")
     public ResponseEntity<Session> delete(@PathVariable String code) {
         Session session = repo.findOne(code);

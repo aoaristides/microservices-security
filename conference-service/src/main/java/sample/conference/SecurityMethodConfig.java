@@ -1,4 +1,4 @@
-package sample.session;
+package sample.conference;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;

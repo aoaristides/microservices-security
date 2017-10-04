@@ -26,8 +26,8 @@ services:
     networks:
       - microservices
 
-  session-service:
-    image: microservices/session-service
+  conference-service:
+    image: microservices/conference-service
     links:
       - discovery-server
       - oauth2-server
@@ -41,7 +41,7 @@ services:
     links:
       - discovery-server
       - oauth2-server
-      - session-service
+      - conference-service
       - speaker-service
     expose:
       - 8080

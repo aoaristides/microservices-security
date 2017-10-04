@@ -1,4 +1,4 @@
-package sample.session;
+package sample.conference;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -22,7 +22,7 @@ export class LoginService {
     headers.append('Authorization', 'Basic ' + btoa('client:secret'));
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
 
-    return this.http.post(environment.apiRoot + "/security/oauth/token", params, {headers: headers})
+    return this.http.post(environment.apiRoot + "/uaa/oauth/token", params, {headers: headers})
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

@@ -15,21 +15,20 @@ zuul:
   sensitiveHeaders:
   routes:
     security-server:
-      path: /security/**
-      serviceId: security-server
+      path: /uaa/**
+      serviceId: oauth2-server
     aluno-service:
-      path: /session/**
-      serviceId: session-service
+      path: /conference/**
+      serviceId: conference-service
     disciplina-service:
       path: /speaker/**
       serviceId: speaker-service
   ratelimit:
-    key-prefix: your-prefix
     enabled: true
     repository: IN_MEMORY
     behind-proxy: true
     default-policy: #optional - will apply unless specific policy exists
-      limit: 10 #optional - request number limit per refresh interval window
+      limit: 20 #optional - request number limit per refresh interval window
       quota: 1000 #optional - request time limit per refresh interval window (in seconds)
       refresh-interval: 60 #default value (in seconds)
       type: #optional

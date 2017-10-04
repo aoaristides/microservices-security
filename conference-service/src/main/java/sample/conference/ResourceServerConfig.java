@@ -1,4 +1,4 @@
-package sample.session;
+package sample.conference;
 
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;

@@ -3,11 +3,11 @@ server:
   
 spring:
   application:
-    name: session-service  
+    name: conference-service
   
 info:
-  name: session-service
-  description: Session Service Sample    
+  name: conference-service
+  description: Conference Service Sample
 
 security:
   sessions: stateless
@@ -28,12 +28,6 @@ security:
             80Zl0+Gwjl6Wag5Mu9H7MIUPo+4xFGAJ0uwseHiErZqdWlHIo179IacB87+9Vt0g
             pwIDAQAB
             -----END PUBLIC KEY-----
-            
-# This sample is delegating to get the user details via another service                        
-#  oauth2:
-#    resource:
-#      preferTokenInfo: false
-#      userInfoUri: http://localhost:9999/users/current
 
 eureka:
  client:

@@ -1,4 +1,4 @@
-package sample.session;
+package sample.conference;
 
 import java.io.Serializable;
 

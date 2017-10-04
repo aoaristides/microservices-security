@@ -29,7 +29,7 @@
         <module>api-gateway</module>
         <module>discovery-server</module>
         <module>oauth2-server</module>
-        <module>session-service</module>
+        <module>conference-service</module>
         <module>speaker-service</module>
     </modules>
 
