@@ -1,6 +1,5 @@
 package sample.gateway;
 
-import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.newArrayList;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
