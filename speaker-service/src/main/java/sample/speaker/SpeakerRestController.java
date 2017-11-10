@@ -42,7 +42,7 @@ public class SpeakerRestController {
 		}
 	}
 
-	@PreAuthorize("hasRole('MANAGER') && #oauth2.isUser()")
+	@PreAuthorize("hasRole('MANAGER') && #oauth2.isUser() && #oauth2.hasScope('write')")
 	@PutMapping("/{id}")
 	public ResponseEntity<Speaker> update(@PathVariable Long id, @RequestBody Speaker speaker) {
 		if (speaker != null) {
@@ -54,7 +54,7 @@ public class SpeakerRestController {
 		}
 	}
 
-	@PreAuthorize("hasRole('ADMIN') && #oauth2.hasScope('delete')")
+	@PreAuthorize("hasRole('ADMIN') && #oauth2.hasScope('custom')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Speaker> delete(@PathVariable Long id) {
 		Speaker speaker = repo.findOne(id);

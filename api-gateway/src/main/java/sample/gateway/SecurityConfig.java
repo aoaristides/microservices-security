@@ -69,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		config.setAllowCredentials(true);
 		config.addAllowedHeader("*");
 		config.addAllowedOrigin("http://localhost:4200");
+//		config.addAllowedOrigin("http://www.google.com.br");
 		config.setAllowedMethods(newArrayList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		source.registerCorsConfiguration("/**", config);
 		return source;

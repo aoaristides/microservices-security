@@ -51,7 +51,7 @@ public class SessionRestController {
         }
     }
 
-    @PreAuthorize("hasRole('MANAGER') && #oauth2.isUser()")
+    @PreAuthorize("hasRole('MANAGER') && #oauth2.isUser() && #oauth2.hasScope('write')")
     @PutMapping("/{code}")
     public ResponseEntity<Session> update(@PathVariable String code, @RequestBody Session session) {
         if (session != null) {
