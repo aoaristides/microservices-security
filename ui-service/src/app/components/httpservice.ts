@@ -16,29 +16,35 @@ export class HttpService extends Http {
   }
 
   request(url: string|Request, options?: RequestOptionsArgs): Observable<Response> {
-    let token = localStorage.getItem('accessToken');
+    let accessToken = localStorage.getItem('accessToken');
+    let csrfToken = localStorage.getItem('csrfToken');
+    let sessionToken = localStorage.getItem('sessionToken');
 
     if (!options) {
       // let's make a new option object
       options = {headers: new Headers()};
     }
 
-    if(token){
-      if (typeof url === 'string') { // meaning we have to add the token to the options, not in url
-        options.headers.set('Authorization', 'Bearer ' + JSON.parse(token).access_token);
-      } else {
-        // we have to add the token to the url object
-        url.headers.set('Authorization', 'Bearer ' + JSON.parse(token).access_token);
-      }
-    }else{
-      if (typeof url === 'string') {
-        options.headers.delete('Authorization');
-      }else{
-        url.headers.delete('Authorization');
-      }
+    let headers;
+    if (typeof url === 'string') {
+      headers = options.headers;
+    } else {
+      headers = url.headers;
     }
 
+    this.setToken('Authorization', 'Bearer ' + JSON.parse(accessToken).access_token, headers);
+    this.setToken('X-CSRF-TOKEN', csrfToken, headers);
+    this.setToken('X-SESSION-TOKEN', sessionToken, headers);
+
     return super.request(url, options).catch(this.catchAuthError(this));
+  }
+
+  private setToken(key: string, token: string, headers: Headers) {
+    if (token) {
+      headers.set(key, token);
+    } else {
+      headers.delete(key);
+    }
   }
 
   private catchAuthError (self: HttpService) {

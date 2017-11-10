@@ -1,10 +1,18 @@
 package sample.gateway;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.session.MapSessionRepository;
+import org.springframework.session.SessionRepository;
+import org.springframework.session.config.annotation.web.http.EnableSpringHttpSession;
+import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -15,17 +23,29 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 @Configuration
+@EnableSpringHttpSession
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/**").permitAll();
+		// Enabling CORS configuration
 		http.cors().configurationSource(corsConfigurationSource());
-		http.csrf().ignoringAntMatchers("/uaa/**");
+		// Enabling CSRF configuration
+		http.csrf().ignoringAntMatchers("/uaa/**").csrfTokenRepository(csrfTokenRepository())
+				.requireCsrfProtectionMatcher(new RequestMatcher() {
+			private final HashSet<String> allowedMethods = new HashSet<>(Arrays.asList("HEAD", "TRACE", "OPTIONS"));
+			@Override
+			public boolean matches(HttpServletRequest request) {
+				return !this.allowedMethods.contains(request.getMethod());
+			}
+		});
 		// CSRF tokens handling
 		http.addFilterAfter(new OncePerRequestFilter() {
 			@Override
@@ -36,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					response.setHeader("X-CSRF-HEADER", token.getHeaderName());
 					response.setHeader("X-CSRF-PARAM", token.getParameterName());
 					response.setHeader("X-CSRF-TOKEN" , token.getToken());
+					response.setHeader("Access-Control-Expose-Headers" , "X-SESSION-TOKEN, X-CSRF-HEADER, X-CSRF-PARAM, X-CSRF-TOKEN");
 				}
 				filterChain.doFilter(request, response);
 			}
@@ -51,6 +72,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		config.setAllowedMethods(newArrayList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		source.registerCorsConfiguration("/**", config);
 		return source;
+	}
+
+	private CsrfTokenRepository csrfTokenRepository() {
+		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+		repository.setHeaderName("X-CSRF-TOKEN");
+		return repository;
+	}
+
+	@Bean
+	public SessionRepository sessionRepository() {
+		return new MapSessionRepository();
+	}
+
+	@Bean
+	// Setting the session strategy to support CSRF tokens
+	public HeaderHttpSessionStrategy sessionStrategy() {
+		HeaderHttpSessionStrategy strategy = new HeaderHttpSessionStrategy();
+		strategy.setHeaderName("X-SESSION-TOKEN");
+		return strategy;
 	}
 
 }
